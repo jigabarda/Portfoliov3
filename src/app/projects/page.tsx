@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react'
+import React, {useState} from 'react'
 import { Montserrat } from 'next/font/google'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,7 +52,7 @@ const items = [
 const categories = ["All", "Web", "Mobile", "Desktop", "IoT"];
 
 const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredItems = selectedCategory === "All"
     ? items
