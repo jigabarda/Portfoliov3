@@ -1,32 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Profile from '@/img/profile.jpg'
 
+const profileImages = [
+  Profile,
+  Profile,
+  Profile,
+  Profile,
+]
+
 const About = () => {
+  const [selectedImage, setSelectedImage] = useState(0)
   return (
     <div className="h-screen bg-green-300 panel flex items-center justify-center">
       <div className="grid md:grid-cols-2 w-full  px-50">
         {/* Left Side: Profile Section */}
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col">
           <h1 className="text-5xl font-extrabold mb-6 text-[#426B69]">About Me</h1>
-                    <p className="text-lg text-[#426B69] text-center max-w-2xl">
+          <p className="text-lg text-[#426B69] max-w-2xl">
             Hi! I&apos;m James Ivan Gabarda, a passionate web developer and UI/UX designer. I love building beautiful, functional digital experiences and bringing creative ideas to life. Welcome to my portfolio!
           </p>
           {/* Main Profile Image - Square */}
           <Image
-            src={Profile}
+            src={profileImages[selectedImage]}
             alt="Profile"
-            width={192}
-            height={192}
-            className="w-48 h-48 rounded-2xl object-cover shadow-lg border-4 border-white mb-6"
+            className="w-128 h-128 rounded-2xl object-cover shadow-lg mb-4"
             priority
           />
           {/* 4 Smaller Images Below - Square */}
-          <div className="flex space-x-4 mb-6">
-            <Image src={Profile} alt="Profile 2" width={64} height={64} className="w-16 h-16 rounded-lg object-cover border-2 border-white shadow" />
-            <Image src={Profile} alt="Profile 3" width={64} height={64} className="w-16 h-16 rounded-lg object-cover border-2 border-white shadow" />
-            <Image src={Profile} alt="Profile 4" width={64} height={64} className="w-16 h-16 rounded-lg object-cover border-2 border-white shadow" />
-            <Image src={Profile} alt="Profile 5" width={64} height={64} className="w-16 h-16 rounded-lg object-cover border-2 border-white shadow" />
+          <div className="flex space-x-4 mb-6 ">
+            {profileImages.map((img, idx) => (
+              <Image
+                key={idx}
+                src={img}
+                alt={`Profile ${idx + 1}`}
+                width={64}
+                height={64}
+                className={`w-29 h-29 rounded-lg object-cover shadow cursor-pointer ${selectedImage === idx ? 'ring-2 ring-black' : ''}`}
+                onClick={() => setSelectedImage(idx)}
+              />
+            ))}
           </div>
         </div>
 
